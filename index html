@@ -1,0 +1,2145 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>JUST ASK BCR AI</title>
+
+<style>
+:root {
+  --bg: #050914;
+  --bg2: #091222;
+  --panel: rgba(15, 25, 43, 0.78);
+  --panel-light: rgba(25, 39, 63, 0.75);
+  --line: rgba(110, 190, 255, 0.18);
+  --blue: #38a8ff;
+  --cyan: #5ee7ff;
+  --white: #f7fbff;
+  --muted: #91a3bb;
+  --green: #38e6a2;
+  --gold: #ffd166;
+  --danger: #ff6b7a;
+  --radius: 24px;
+  --shadow: 0 25px 70px rgba(0,0,0,.45);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: var(--white);
+  background:
+    radial-gradient(circle at 10% 10%, rgba(56,168,255,.16), transparent 28%),
+    radial-gradient(circle at 90% 20%, rgba(94,231,255,.10), transparent 25%),
+    radial-gradient(circle at 50% 100%, rgba(41,90,180,.12), transparent 35%),
+    var(--bg);
+  min-height: 100vh;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px);
+  background-size: 50px 50px;
+  mask-image: linear-gradient(to bottom, black, transparent 80%);
+}
+
+/* HEADER */
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(20px);
+  background: rgba(5,9,20,.72);
+  border-bottom: 1px solid rgba(255,255,255,.07);
+}
+
+.nav {
+  width: min(1250px, calc(100% - 32px));
+  margin: auto;
+  min-height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 900;
+  letter-spacing: -.04em;
+  font-size: 20px;
+}
+
+.logo-mark {
+  width: 42px;
+  height: 42px;
+  border-radius: 13px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(145deg, #43b7ff, #2164ff);
+  box-shadow:
+    inset 0 1px 1px rgba(255,255,255,.5),
+    0 10px 30px rgba(33,100,255,.35);
+}
+
+.logo-mark span {
+  font-size: 20px;
+  font-weight: 1000;
+}
+
+.nav-links {
+  display: flex;
+  gap: 8px;
+}
+
+.nav-links button {
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  padding: 10px 14px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.nav-links button:hover {
+  color: white;
+  background: rgba(255,255,255,.06);
+}
+
+/* HERO */
+
+.hero {
+  width: min(1250px, calc(100% - 32px));
+  margin: auto;
+  padding: 90px 0 50px;
+  text-align: center;
+  position: relative;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border: 1px solid rgba(94,231,255,.22);
+  border-radius: 999px;
+  background: rgba(94,231,255,.06);
+  color: #aeefff;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 14px var(--green);
+}
+
+h1 {
+  margin: 24px auto 14px;
+  max-width: 950px;
+  font-size: clamp(48px, 8vw, 94px);
+  line-height: .91;
+  letter-spacing: -.065em;
+  font-weight: 950;
+}
+
+.gradient-text {
+  background: linear-gradient(90deg, #fff, #76d9ff, #4da0ff, #fff);
+  background-size: 250% auto;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: shine 7s linear infinite;
+}
+
+@keyframes shine {
+  to {
+    background-position: 250% center;
+  }
+}
+
+.hero p {
+  color: var(--muted);
+  font-size: 18px;
+  max-width: 680px;
+  margin: 0 auto 32px;
+  line-height: 1.7;
+}
+
+/* SEARCH */
+
+.search-shell {
+  max-width: 920px;
+  margin: 35px auto 0;
+  padding: 10px;
+  border-radius: 30px;
+  background: linear-gradient(
+    145deg,
+    rgba(94,231,255,.18),
+    rgba(255,255,255,.035)
+  );
+  border: 1px solid rgba(94,231,255,.15);
+  box-shadow:
+    0 30px 90px rgba(0,0,0,.45),
+    inset 0 1px rgba(255,255,255,.1);
+}
+
+.search-box {
+  display: grid;
+  grid-template-columns: 1fr 190px 145px;
+  gap: 10px;
+  padding: 7px;
+  border-radius: 22px;
+  background: rgba(4,9,18,.88);
+}
+
+.search-box input,
+.search-box select {
+  min-width: 0;
+  height: 58px;
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 17px;
+  background: rgba(255,255,255,.045);
+  color: white;
+  outline: none;
+  padding: 0 18px;
+  font-size: 15px;
+}
+
+.search-box input::placeholder {
+  color: #71839c;
+}
+
+.search-box input:focus,
+.search-box select:focus {
+  border-color: rgba(94,231,255,.55);
+  box-shadow: 0 0 0 3px rgba(94,231,255,.08);
+}
+
+.search-box select option {
+  background: #101a2c;
+}
+
+.ask-button {
+  height: 58px;
+  border: 0;
+  border-radius: 17px;
+  cursor: pointer;
+  color: white;
+  font-size: 16px;
+  font-weight: 900;
+  background: linear-gradient(145deg, #4bc8ff, #2865ff);
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.45),
+    0 12px 30px rgba(38,108,255,.3);
+  transition: .2s;
+}
+
+.ask-button:hover {
+  transform: translateY(-2px);
+}
+
+.ask-button:disabled {
+  opacity: .65;
+  cursor: wait;
+}
+
+/* SECTIONS */
+
+.section {
+  width: min(1250px, calc(100% - 32px));
+  margin: auto;
+  padding: 50px 0;
+}
+
+.section-heading {
+  margin-bottom: 25px;
+}
+
+.section-heading h2 {
+  margin: 0;
+  font-size: clamp(28px, 4vw, 44px);
+  letter-spacing: -.045em;
+}
+
+.section-heading p {
+  color: var(--muted);
+  margin: 8px 0 0;
+}
+
+/* QUICK CARDS */
+
+.quick-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  perspective: 1400px;
+}
+
+.quick-card {
+  min-height: 190px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 25px;
+  border: 1px solid rgba(120,200,255,.16);
+  background:
+    linear-gradient(145deg, rgba(32,51,81,.82), rgba(10,18,32,.86));
+  box-shadow:
+    0 22px 45px rgba(0,0,0,.38),
+    inset 0 1px rgba(255,255,255,.09);
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transition: .3s;
+  text-align: left;
+  padding: 24px;
+  color: white;
+}
+
+.quick-card:hover {
+  transform: translateY(-9px) rotateX(3deg) rotateY(-2deg);
+  border-color: rgba(94,231,255,.45);
+}
+
+.card-icon {
+  width: 58px;
+  height: 58px;
+  display: grid;
+  place-items: center;
+  border-radius: 18px;
+  font-size: 28px;
+  background: linear-gradient(
+    145deg,
+    rgba(92,210,255,.22),
+    rgba(48,98,255,.13)
+  );
+  border: 1px solid rgba(120,220,255,.18);
+}
+
+.quick-card h3 {
+  margin: 20px 0 5px;
+  font-size: 20px;
+}
+
+.quick-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.card-arrow {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  font-size: 20px;
+  color: #8deaff;
+}
+
+/* SPECIAL */
+
+.special-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.special-card {
+  min-height: 180px;
+  padding: 28px;
+  border-radius: 26px;
+  border: 1px solid rgba(255,255,255,.09);
+  background:
+    linear-gradient(145deg, rgba(22,35,59,.9), rgba(7,14,26,.9));
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: .3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.special-card:hover {
+  transform: translateY(-7px);
+  border-color: rgba(94,231,255,.3);
+}
+
+.special-card h3 {
+  font-size: 25px;
+  margin: 0 0 8px;
+}
+
+.special-card p {
+  color: var(--muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.special-card .big-symbol {
+  position: absolute;
+  right: 25px;
+  bottom: -20px;
+  font-size: 110px;
+  opacity: .08;
+}
+
+/* RESULTS */
+
+#resultsSection {
+  display: none;
+}
+
+.results-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.results-count {
+  color: var(--muted);
+}
+
+.clear-button {
+  border: 1px solid rgba(255,255,255,.1);
+  background: rgba(255,255,255,.04);
+  color: white;
+  border-radius: 12px;
+  padding: 10px 15px;
+  cursor: pointer;
+}
+
+.results-grid,
+.directory-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+/* BUSINESS CARDS */
+
+.business-card {
+  border: 1px solid rgba(255,255,255,.09);
+  border-radius: 23px;
+  background:
+    linear-gradient(145deg, rgba(20,32,52,.9), rgba(8,15,27,.93));
+  padding: 23px;
+  box-shadow: 0 20px 50px rgba(0,0,0,.35);
+  transition: .25s;
+}
+
+.business-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(94,231,255,.3);
+}
+
+.business-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.business-name {
+  font-size: 19px;
+  font-weight: 900;
+  line-height: 1.25;
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 10px;
+}
+
+.badge {
+  display: inline-flex;
+  padding: 5px 8px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.badge-bcr {
+  background: rgba(56,230,162,.12);
+  color: #63efb6;
+  border: 1px solid rgba(56,230,162,.2);
+}
+
+.business-category {
+  color: #77cfff;
+  margin-top: 14px;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.business-detail {
+  color: var(--muted);
+  font-size: 13px;
+  margin-top: 9px;
+  line-height: 1.5;
+}
+
+.business-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.business-actions a {
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,.09);
+  background: rgba(255,255,255,.045);
+  color: white;
+  border-radius: 11px;
+  padding: 9px 11px;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.business-actions a:hover {
+  background: rgba(94,231,255,.1);
+}
+
+/* FORMS */
+
+.form-panel {
+  max-width: 850px;
+  margin: auto;
+  padding: 30px;
+  border-radius: 28px;
+  border: 1px solid rgba(255,255,255,.09);
+  background: rgba(13,23,40,.82);
+  box-shadow: var(--shadow);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.form-field.full {
+  grid-column: 1 / -1;
+}
+
+.form-field label {
+  color: #aabbd0;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.form-field input,
+.form-field textarea,
+.form-field select {
+  width: 100%;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 13px;
+  background: rgba(255,255,255,.04);
+  color: white;
+  padding: 13px;
+  outline: none;
+  font: inherit;
+}
+
+.form-field textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
+.submit-button {
+  margin-top: 18px;
+  border: 0;
+  border-radius: 14px;
+  padding: 14px 20px;
+  background: linear-gradient(145deg, #45caff, #2766ff);
+  color: white;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+/* NOTICES */
+
+.notice {
+  padding: 16px 18px;
+  border-radius: 15px;
+  background: rgba(255,255,255,.045);
+  border: 1px solid rgba(255,255,255,.07);
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 25px;
+  justify-content: center;
+  color: var(--muted);
+}
+
+.spinner {
+  width: 23px;
+  height: 23px;
+  border: 3px solid rgba(255,255,255,.1);
+  border-top-color: var(--cyan);
+  border-radius: 50%;
+  animation: spin .7s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* FOOTER */
+
+footer {
+  margin-top: 80px;
+  border-top: 1px solid rgba(255,255,255,.07);
+  padding: 35px 16px;
+  text-align: center;
+  color: #687a92;
+  font-size: 13px;
+}
+
+/* MOBILE */
+
+@media (max-width: 950px) {
+
+  .quick-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .results-grid,
+  .directory-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .search-box {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .search-box input {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 650px) {
+
+  .nav-links {
+    display: none;
+  }
+
+  .hero {
+    padding-top: 60px;
+  }
+
+  h1 {
+    font-size: 48px;
+  }
+
+  .search-box,
+  .quick-grid,
+  .results-grid,
+  .directory-grid,
+  .special-grid,
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .search-box input {
+    grid-column: auto;
+  }
+
+  .form-field.full {
+    grid-column: auto;
+  }
+
+  .quick-card {
+    min-height: 160px;
+  }
+
+  .section {
+    padding: 35px 0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="nav">
+
+    <div class="logo">
+      <div class="logo-mark"><span>B</span></div>
+      <div>JUST ASK BCR AI</div>
+    </div>
+
+    <div class="nav-links">
+      <button onclick="scrollToSection('searchSection')">Search</button>
+      <button onclick="scrollToSection('directorySection')">Directory</button>
+      <button onclick="scrollToSection('registerSection')">Register</button>
+      <button onclick="scrollToSection('advertiseSection')">Advertise</button>
+    </div>
+
+  </div>
+</header>
+
+<main>
+
+<section class="hero" id="searchSection">
+
+  <div class="hero-badge">
+    <span class="status-dot"></span>
+    BCR AI LOCAL SEARCH
+  </div>
+
+  <h1>
+    <span class="gradient-text">JUST ASK.</span><br>
+    Find what you need.
+  </h1>
+
+  <p>
+    Search local businesses using AI. Find BCR registered businesses
+    alongside businesses from Google Maps.
+  </p>
+
+  <div class="search-shell">
+
+    <div class="search-box">
+
+      <input
+        id="mainSearch"
+        type="text"
+        placeholder="What are you looking for?"
+        autocomplete="off"
+      >
+
+      <select id="searchLocation">
+        <option value="Blackpool">Blackpool</option>
+        <option value="Fylde Coast">Fylde Coast</option>
+        <option value="Lancashire">Lancashire</option>
+        <option value="anywhere">Anywhere</option>
+      </select>
+
+      <button class="ask-button" id="askButton">
+        ASK AI →
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<section class="section">
+
+  <div class="section-heading">
+    <h2>What are you looking for?</h2>
+    <p>Tap a category and BCR AI will search for you.</p>
+  </div>
+
+  <div class="quick-grid">
+
+    <button class="quick-card" data-search="plumber">
+      <div class="card-icon">🔧</div>
+      <h3>Plumbers</h3>
+      <p>Find plumbers and plumbing services.</p>
+      <span class="card-arrow">→</span>
+    </button>
+
+    <button class="quick-card" data-search="electrician">
+      <div class="card-icon">⚡</div>
+      <h3>Electricians</h3>
+      <p>Find local electrical contractors.</p>
+      <span class="card-arrow">→</span>
+    </button>
+
+    <button class="quick-card" data-search="restaurant">
+      <div class="card-icon">🍽️</div>
+      <h3>Restaurants</h3>
+      <p>Discover restaurants and places to eat.</p>
+      <span class="card-arrow">→</span>
+    </button>
+
+    <button class="quick-card" data-search="hairdresser">
+      <div class="card-icon">💇</div>
+      <h3>Hairdressers</h3>
+      <p>Find salons and hair professionals.</p>
+      <span class="card-arrow">→</span>
+    </button>
+
+    <button class="quick-card" data-search="builder">
+      <div class="card-icon">🏗️</div>
+      <h3>Builders</h3>
+      <p>Find building and construction services.</p>
+      <span class="card-arrow">→</span>
+    </button>
+
+    <button class="quick-card" data-search="garage">
+      <div class="card-icon">🚗</div>
+      <h3>Car Garages</h3>
+      <p>Find garages, mechanics and auto services.</p>
+      <span class="card-arrow">→</span>
+    </button>
+
+    <button class="quick-card" data-search="cafe">
+      <div class="card-icon">☕</div>
+      <h3>Cafés</h3>
+      <p>Find cafés, coffee shops and bakeries.</p>
+      <span class="card-arrow">→</span>
+    </button>
+
+    <button class="quick-card" data-search="shop">
+      <div class="card-icon">🛍️</div>
+      <h3>Shops</h3>
+      <p>Find local shops and businesses.</p>
+      <span class="card-arrow">→</span>
+    </button>
+
+  </div>
+
+
+  <div class="special-grid">
+
+    <div class="special-card" id="browseCard">
+      <h3>🏪 Browse BCR Businesses</h3>
+      <p>
+        Explore businesses that have registered directly with
+        the BCR directory.
+      </p>
+      <div class="big-symbol">BCR</div>
+    </div>
+
+    <div class="special-card" id="nearMeCard">
+      <h3>📍 Businesses Near Me</h3>
+      <p>
+        Search local businesses around your selected area.
+      </p>
+      <div class="big-symbol">⌖</div>
+    </div>
+
+  </div>
+
+</section>
+
+
+<section class="section" id="resultsSection">
+
+  <div class="results-toolbar">
+
+    <div>
+      <div class="section-heading" style="margin:0">
+        <h2>Search Results</h2>
+      </div>
+
+      <div class="results-count" id="resultsCount"></div>
+    </div>
+
+    <button class="clear-button" id="clearResults">
+      Clear
+    </button>
+
+  </div>
+
+  <div id="askResults"></div>
+
+</section>
+
+
+<section class="section" id="directorySection">
+
+  <div class="section-heading">
+    <h2>BCR Business Directory</h2>
+    <p>Businesses registered with BCR.</p>
+  </div>
+
+  <div id="businessDirectory" class="directory-grid">
+
+    <div class="loading">
+      <div class="spinner"></div>
+      Loading businesses...
+    </div>
+
+  </div>
+
+</section>
+
+
+<section class="section" id="registerSection">
+
+  <div class="section-heading">
+    <h2>Register Your Business</h2>
+    <p>Put your business in front of people searching locally.</p>
+  </div>
+
+  <div class="form-panel">
+
+    <form id="businessForm">
+
+      <div class="form-grid">
+
+        <div class="form-field">
+          <label>Business Name</label>
+          <input id="businessName" required>
+        </div>
+
+        <div class="form-field">
+          <label>Category</label>
+          <input
+            id="businessCategory"
+            placeholder="e.g. Plumber"
+            required
+          >
+        </div>
+
+        <div class="form-field full">
+          <label>Description</label>
+          <textarea id="businessDescription"></textarea>
+        </div>
+
+        <div class="form-field">
+          <label>Address</label>
+          <input id="businessAddress">
+        </div>
+
+        <div class="form-field">
+          <label>Area</label>
+          <input
+            id="businessArea"
+            placeholder="e.g. Blackpool"
+          >
+        </div>
+
+        <div class="form-field">
+          <label>Postcode</label>
+          <input id="businessPostcode">
+        </div>
+
+        <div class="form-field">
+          <label>Phone</label>
+          <input id="businessPhone">
+        </div>
+
+        <div class="form-field">
+          <label>Email</label>
+          <input id="businessEmail" type="email">
+        </div>
+
+        <div class="form-field">
+          <label>Website</label>
+          <input
+            id="businessWebsite"
+            placeholder="https://"
+          >
+        </div>
+
+      </div>
+
+      <button
+        class="submit-button"
+        type="submit"
+      >
+        REGISTER BUSINESS
+      </button>
+
+      <div id="businessFormMessage"></div>
+
+    </form>
+
+  </div>
+
+</section>
+
+
+<section class="section" id="advertiseSection">
+
+  <div class="section-heading">
+    <h2>Advertise With BCR AI</h2>
+    <p>Put your business in front of people actively searching.</p>
+  </div>
+
+  <div class="form-panel">
+
+    <div class="notice">
+
+      <strong>Advertising with BCR AI</strong>
+
+      <br><br>
+
+      Advertising campaigns are managed through BCR.
+      Register your business first, then contact BCR
+      to select an advertising package and campaign.
+
+    </div>
+
+  </div>
+
+</section>
+
+</main>
+
+
+<footer>
+  JUST ASK BCR AI · Local business search
+</footer>
+
+
+<script>
+
+/* =========================================================
+   SUPABASE
+========================================================= */
+
+const SUPABASE_URL =
+  "https://mqnzubsfgvdnndfwhpcz.supabase.co";
+
+const SUPABASE_KEY =
+  "sb_publishable_oEf2PGkToQHsw_Tvo-faAA_L9uS1aX6";
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function escapeHtml(value) {
+
+  if (
+    value === null ||
+    value === undefined
+  ) {
+    return "";
+  }
+
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+
+function scrollToSection(id) {
+
+  const element =
+    document.getElementById(id);
+
+  if (element) {
+
+    element.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+
+  }
+
+}
+
+
+function supabaseHeaders(extra = {}) {
+
+  return {
+    "apikey": SUPABASE_KEY,
+    "Accept": "application/json",
+    ...extra
+  };
+
+}
+
+
+/* =========================================================
+   DATABASE
+========================================================= */
+
+async function getApprovedBusinesses() {
+
+  const url =
+    SUPABASE_URL +
+    "/rest/v1/businesses" +
+    "?status=eq.approved" +
+    "&order=business_name.asc";
+
+
+  const response =
+    await fetch(
+      url,
+      {
+        method: "GET",
+        headers: supabaseHeaders()
+      }
+    );
+
+
+  if (!response.ok) {
+
+    const text =
+      await response.text();
+
+    throw new Error(
+      text ||
+      `Database request failed (${response.status})`
+    );
+
+  }
+
+
+  return await response.json();
+
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+async function performSearch(
+  customQuery = null
+) {
+
+  const searchInput =
+    document.getElementById("mainSearch");
+
+  const locationInput =
+    document.getElementById("searchLocation");
+
+  const resultsSection =
+    document.getElementById("resultsSection");
+
+  const resultsContainer =
+    document.getElementById("askResults");
+
+  const resultsCount =
+    document.getElementById("resultsCount");
+
+  const button =
+    document.getElementById("askButton");
+
+
+  const query =
+    customQuery ||
+    searchInput.value.trim();
+
+
+  const location =
+    locationInput.value ||
+    "anywhere";
+
+
+  if (!query) {
+
+    searchInput.focus();
+
+    return;
+
+  }
+
+
+  searchInput.value = query;
+
+  resultsSection.style.display = "block";
+
+  resultsContainer.innerHTML = `
+    <div class="loading">
+      <div class="spinner"></div>
+      BCR AI is searching...
+    </div>
+  `;
+
+  resultsCount.textContent = "";
+
+  button.disabled = true;
+  button.textContent = "SEARCHING...";
+
+
+  resultsSection.scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+
+
+  try {
+
+    const businesses =
+      await getApprovedBusinesses();
+
+
+    const searchWords =
+      query
+        .toLowerCase()
+        .split(/\s+/)
+        .filter(Boolean);
+
+
+    const locationWords =
+      location === "anywhere"
+        ? []
+        : location
+            .toLowerCase()
+            .split(/\s+/)
+            .filter(Boolean);
+
+
+    const results =
+      businesses
+        .map(
+          business => {
+
+            const searchableText = [
+
+              business.business_name,
+              business.category,
+              business.description,
+              business.address,
+              business.area,
+              business.postcode
+
+            ]
+              .filter(Boolean)
+              .join(" ")
+              .toLowerCase();
+
+
+            const locationText = [
+
+              business.address,
+              business.area,
+              business.postcode
+
+            ]
+              .filter(Boolean)
+              .join(" ")
+              .toLowerCase();
+
+
+            let score = 0;
+
+
+            for (
+              const word of searchWords
+            ) {
+
+              if (
+                searchableText.includes(word)
+              ) {
+
+                score += 2;
+
+              }
+
+
+              if (
+                String(
+                  business.business_name || ""
+                )
+                  .toLowerCase()
+                  .includes(word)
+              ) {
+
+                score += 5;
+
+              }
+
+
+              if (
+                String(
+                  business.category || ""
+                )
+                  .toLowerCase()
+                  .includes(word)
+              ) {
+
+                score += 4;
+
+              }
+
+
+              if (
+                String(
+                  business.description || ""
+                )
+                  .toLowerCase()
+                  .includes(word)
+              ) {
+
+                score += 2;
+
+              }
+
+            }
+
+
+            if (
+              locationWords.length
+            ) {
+
+              const locationMatch =
+                locationWords.some(
+                  word =>
+                    locationText.includes(word)
+                );
+
+
+              if (locationMatch) {
+
+                score += 5;
+
+              } else {
+
+                score -= 3;
+
+              }
+
+            }
+
+
+            return {
+              ...business,
+              score
+            };
+
+          }
+        )
+        .filter(
+          business =>
+            business.score > 0
+        )
+        .sort(
+          (a, b) => {
+
+            if (
+              b.score !== a.score
+            ) {
+
+              return b.score - a.score;
+
+            }
+
+
+            return String(
+              a.business_name
+            ).localeCompare(
+              String(
+                b.business_name
+              )
+            );
+
+          }
+        )
+        .slice(0, 30);
+
+
+    resultsCount.textContent =
+      `${results.length} result${
+        results.length === 1
+          ? ""
+          : "s"
+      } found`;
+
+
+    if (!results.length) {
+
+      resultsContainer.innerHTML = `
+        <div class="notice">
+
+          <strong>
+            No matching businesses found.
+          </strong>
+
+          <br><br>
+
+          Try another search, category or location.
+
+        </div>
+      `;
+
+      return;
+
+    }
+
+
+    renderBusinesses(
+      results,
+      resultsContainer
+    );
+
+
+  } catch (error) {
+
+    console.error(
+      "Search error:",
+      error
+    );
+
+
+    resultsContainer.innerHTML = `
+      <div class="notice">
+
+        <strong>
+          Search could not be completed.
+        </strong>
+
+        <br><br>
+
+        ${escapeHtml(
+          error.message
+        )}
+
+      </div>
+    `;
+
+  } finally {
+
+    button.disabled = false;
+    button.textContent = "ASK AI →";
+
+  }
+
+}
+
+
+/* =========================================================
+   BUSINESS CARDS
+========================================================= */
+
+function renderBusinesses(
+  businesses,
+  container
+) {
+
+  container.innerHTML = `
+
+    <div class="results-grid">
+
+      ${
+        businesses
+          .map(
+            business =>
+              renderBusinessCard(
+                business
+              )
+          )
+          .join("")
+      }
+
+    </div>
+
+  `;
+
+}
+
+
+function renderBusinessCard(
+  business
+) {
+
+  const name =
+    business.business_name ||
+    "Business";
+
+
+  const category =
+    business.category ||
+    "";
+
+
+  const address =
+    business.address ||
+    "";
+
+
+  const phone =
+    business.phone ||
+    "";
+
+
+  const email =
+    business.email ||
+    "";
+
+
+  const website =
+    business.website ||
+    "";
+
+
+  const description =
+    business.description ||
+    "";
+
+
+  const partner =
+    Boolean(
+      business.partner
+    );
+
+
+  let websiteUrl =
+    website;
+
+
+  if (
+    websiteUrl &&
+    !websiteUrl.startsWith(
+      "http://"
+    ) &&
+    !websiteUrl.startsWith(
+      "https://"
+    )
+  ) {
+
+    websiteUrl =
+      "https://" +
+      websiteUrl;
+
+  }
+
+
+  const mapsUrl =
+    address
+      ? "https://www.google.com/maps/search/?api=1&query=" +
+        encodeURIComponent(address)
+      : "";
+
+
+  return `
+
+    <article class="business-card">
+
+      <div class="business-top">
+
+        <div>
+
+          <div class="business-name">
+
+            ${escapeHtml(name)}
+
+          </div>
+
+
+          <div class="badges">
+
+            ${
+              partner
+                ? `
+                  <span class="badge badge-bcr">
+                    BCR REGISTERED
+                  </span>
+                `
+                : ""
+            }
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      ${
+        category
+          ? `
+            <div class="business-category">
+              ${escapeHtml(category)}
+            </div>
+          `
+          : ""
+      }
+
+
+      ${
+        description
+          ? `
+            <div class="business-detail">
+              ${escapeHtml(description)}
+            </div>
+          `
+          : ""
+      }
+
+
+      ${
+        address
+          ? `
+            <div class="business-detail">
+              📍 ${escapeHtml(address)}
+            </div>
+          `
+          : ""
+      }
+
+
+      ${
+        phone
+          ? `
+            <div class="business-detail">
+              ☎ ${escapeHtml(phone)}
+            </div>
+          `
+          : ""
+      }
+
+
+      <div class="business-actions">
+
+        ${
+          phone
+            ? `
+              <a href="tel:${escapeHtml(phone)}">
+                CALL
+              </a>
+            `
+            : ""
+        }
+
+
+        ${
+          email
+            ? `
+              <a href="mailto:${escapeHtml(email)}">
+                EMAIL
+              </a>
+            `
+            : ""
+        }
+
+
+        ${
+          websiteUrl
+            ? `
+              <a
+                href="${escapeHtml(websiteUrl)}"
+                target="_blank"
+                rel="noopener"
+              >
+                WEBSITE
+              </a>
+            `
+            : ""
+        }
+
+
+        ${
+          mapsUrl
+            ? `
+              <a
+                href="${escapeHtml(mapsUrl)}"
+                target="_blank"
+                rel="noopener"
+              >
+                DIRECTIONS
+              </a>
+            `
+            : ""
+        }
+
+      </div>
+
+    </article>
+
+  `;
+
+}
+
+
+/* =========================================================
+   QUICK CARDS
+========================================================= */
+
+document
+  .querySelectorAll(".quick-card")
+  .forEach(
+    card => {
+
+      card.addEventListener(
+        "click",
+        () => {
+
+          performSearch(
+            card.dataset.search
+          );
+
+        }
+      );
+
+    }
+  );
+
+
+/* =========================================================
+   ASK BUTTON
+========================================================= */
+
+document
+  .getElementById("askButton")
+  .addEventListener(
+    "click",
+    () => performSearch()
+  );
+
+
+document
+  .getElementById("mainSearch")
+  .addEventListener(
+    "keydown",
+    event => {
+
+      if (
+        event.key === "Enter"
+      ) {
+
+        event.preventDefault();
+
+        performSearch();
+
+      }
+
+    }
+  );
+
+
+/* =========================================================
+   BROWSE
+========================================================= */
+
+document
+  .getElementById("browseCard")
+  .addEventListener(
+    "click",
+    () => {
+
+      scrollToSection(
+        "directorySection"
+      );
+
+    }
+  );
+
+
+/* =========================================================
+   NEAR ME
+========================================================= */
+
+document
+  .getElementById("nearMeCard")
+  .addEventListener(
+    "click",
+    () => {
+
+      const location =
+        document.getElementById(
+          "searchLocation"
+        );
+
+
+      if (
+        location.value ===
+        "anywhere"
+      ) {
+
+        location.value =
+          "Blackpool";
+
+      }
+
+
+      document
+        .getElementById(
+          "mainSearch"
+        )
+        .focus();
+
+
+      document
+        .getElementById(
+          "mainSearch"
+        )
+        .placeholder =
+          "What do you need near you?";
+
+    }
+  );
+
+
+/* =========================================================
+   CLEAR RESULTS
+========================================================= */
+
+document
+  .getElementById(
+    "clearResults"
+  )
+  .addEventListener(
+    "click",
+    () => {
+
+      document
+        .getElementById(
+          "resultsSection"
+        )
+        .style.display =
+          "none";
+
+
+      document
+        .getElementById(
+          "askResults"
+        )
+        .innerHTML = "";
+
+
+      document
+        .getElementById(
+          "resultsCount"
+        )
+        .textContent = "";
+
+    }
+  );
+
+
+/* =========================================================
+   DIRECTORY
+========================================================= */
+
+async function loadDirectory() {
+
+  const container =
+    document.getElementById(
+      "businessDirectory"
+    );
+
+
+  try {
+
+    const businesses =
+      await getApprovedBusinesses();
+
+
+    if (
+      !Array.isArray(
+        businesses
+      ) ||
+      !businesses.length
+    ) {
+
+      container.innerHTML = `
+        <div class="notice">
+          No approved BCR businesses
+          are currently listed.
+        </div>
+      `;
+
+      return;
+
+    }
+
+
+    container.innerHTML =
+      businesses
+        .map(
+          business =>
+            renderBusinessCard({
+              ...business,
+              partner: true
+            })
+        )
+        .join("");
+
+
+  } catch (error) {
+
+    console.error(
+      "Directory error:",
+      error
+    );
+
+
+    container.innerHTML = `
+      <div class="notice">
+
+        <strong>
+          The BCR directory could not
+          be loaded.
+        </strong>
+
+        <br><br>
+
+        ${escapeHtml(
+          error.message
+        )}
+
+      </div>
+    `;
+
+  }
+
+}
+
+
+/* =========================================================
+   BUSINESS REGISTRATION
+========================================================= */
+
+document
+  .getElementById(
+    "businessForm"
+  )
+  .addEventListener(
+    "submit",
+    async event => {
+
+      event.preventDefault();
+
+
+      const message =
+        document.getElementById(
+          "businessFormMessage"
+        );
+
+
+      message.innerHTML = `
+        <div class="notice">
+          Sending registration...
+        </div>
+      `;
+
+
+      const business = {
+
+        business_name:
+          document
+            .getElementById(
+              "businessName"
+            )
+            .value
+            .trim(),
+
+        category:
+          document
+            .getElementById(
+              "businessCategory"
+            )
+            .value
+            .trim(),
+
+        description:
+          document
+            .getElementById(
+              "businessDescription"
+            )
+            .value
+            .trim(),
+
+        address:
+          document
+            .getElementById(
+              "businessAddress"
+            )
+            .value
+            .trim(),
+
+        area:
+          document
+            .getElementById(
+              "businessArea"
+            )
+            .value
+            .trim(),
+
+        postcode:
+          document
+            .getElementById(
+              "businessPostcode"
+            )
+            .value
+            .trim(),
+
+        phone:
+          document
+            .getElementById(
+              "businessPhone"
+            )
+            .value
+            .trim(),
+
+        email:
+          document
+            .getElementById(
+              "businessEmail"
+            )
+            .value
+            .trim(),
+
+        website:
+          document
+            .getElementById(
+              "businessWebsite"
+            )
+            .value
+            .trim(),
+
+        status:
+          "pending"
+
+      };
+
+
+      try {
+
+        const response =
+          await fetch(
+            SUPABASE_URL +
+            "/rest/v1/businesses",
+            {
+              method: "POST",
+
+              headers:
+                supabaseHeaders({
+                  "Content-Type":
+                    "application/json",
+
+                  "Prefer":
+                    "return=minimal"
+                }),
+
+              body:
+                JSON.stringify(
+                  business
+                )
+            }
+          );
+
+
+        if (
+          !response.ok
+        ) {
+
+          const text =
+            await response.text();
+
+
+          throw new Error(
+            text ||
+            `Registration failed (${response.status})`
+          );
+
+        }
+
+
+        message.innerHTML = `
+          <div
+            class="notice"
+            style="margin-top:15px"
+          >
+
+            <strong>
+              Registration received.
+            </strong>
+
+            Your business has been
+            submitted for approval.
+
+          </div>
+        `;
+
+
+        event.target.reset();
+
+
+      } catch (error) {
+
+        console.error(
+          "Registration error:",
+          error
+        );
+
+
+        message.innerHTML = `
+          <div
+            class="notice"
+            style="margin-top:15px"
+          >
+
+            <strong>
+              Registration could not
+              be submitted.
+            </strong>
+
+            <br><br>
+
+            ${escapeHtml(
+              error.message
+            )}
+
+          </div>
+        `;
+
+      }
+
+    }
+  );
+
+
+/* =========================================================
+   ADVERTISING
+========================================================= */
+
+document
+  .getElementById(
+    "advertisingForm"
+  )
+  ?.addEventListener(
+    "submit",
+    event => {
+
+      event.preventDefault();
+
+    }
+  );
+
+
+/* =========================================================
+   START
+========================================================= */
+
+loadDirectory();
+
+</script>
+
+</body>
+</html>
+```
