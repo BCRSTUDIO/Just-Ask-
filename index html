@@ -1113,7 +1113,7 @@
       "https://mqnzubsfgvdnndfwhpcz.supabase.co";
 
     const SUPABASE_KEY =
-      "PASTE_YOUR_EXISTING_SUPABASE_PUBLISHABLE_KEY_HERE";
+      "sb_publishable_oEf2PGkToQHsw_Tvo-faAA_L9uS1aX6";
 
     const AI_SEARCH_URL =
       SUPABASE_URL + "/functions/v1/Just-ask";
